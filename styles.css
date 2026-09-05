@@ -1,0 +1,525 @@
+/* Reset และตัวแปร */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --background-color: #2d2d2d;
+    --text-color: #f0f0f0;
+    --dock-background: #3a3a3a;
+    --window-background: #3a3a3a;
+    --window-header-background: #444;
+    --h1-color: #e0afff;
+    --p-color: #ffcc99;
+    --keyword-color: #99ddff;
+    --variable-color: #ff99aa;
+    --fullscreen-bg: rgba(0, 0, 0, 0.95);
+    --nav-btn-color: rgba(255, 255, 255, 0.7);
+    --nav-btn-hover: rgba(255, 255, 255, 0.9);
+    --modal-bg: rgba(0, 0, 0, 0.9);
+}
+
+[data-theme="light"] {
+    --background-color: #f4f4f4;
+    --text-color: #333;
+    --dock-background: #e0e0e0;
+    --window-background: #ffffff;
+    --window-header-background: #e0e0e0;
+    --h1-color: #7a3e9d;
+    --p-color: #9c6b3f;
+    --keyword-color: #2176ae;
+    --variable-color: #c0392b;
+    --fullscreen-bg: rgba(0, 0, 0, 0.95);
+    --nav-btn-color: rgba(255, 255, 255, 0.7);
+    --nav-btn-hover: rgba(255, 255, 255, 0.9);
+    --modal-bg: rgba(0, 0, 0, 0.9);
+}
+
+/* พื้นฐาน */
+body {
+    font-family: "Kanit", sans-serif;
+    background: var(--background-color);
+    color: var(--text-color);
+    overflow: hidden;
+    margin: 0;
+}
+
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+/* ส่วนประกอบหลัก */
+.dock {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 20px;
+    padding: 10px;
+    background: var(--dock-background);
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    max-width: 95%;
+}
+
+/* ไอคอน */
+.dock-icon {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s;
+}
+
+.dock-icon:hover {
+    background: var(--window-header-background);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.dock-icon img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    filter: grayscale(1);
+    transition: filter 0.2s;
+}
+
+.dock-icon:hover img {
+    filter: grayscale(0);
+}
+
+.dock-label {
+    font-size: 16px;
+    color: var(--text-color);
+    white-space: nowrap;
+}
+
+.dock-icon.selected {
+    background: #3e3e42;
+    color: #fff;
+}
+
+.dock-icon.selected img {
+    filter: grayscale(0) invert(1);
+}
+
+.dock-icon.selected .dock-label {
+    color: #fff;
+}
+
+/* Windows */
+.window {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    height: 60%;
+    background: var(--window-background);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.window-header {
+    background: var(--window-header-background);
+    color: var(--text-color);
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+}
+
+.window-header .controls {
+    display: flex;
+    gap: 10px;
+}
+
+.window-header .controls button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+.window-header .controls .close {
+    background: #ff5f56;
+}
+
+.window-header .controls .minimize {
+    background: #ffbd2e;
+}
+
+.window-header .controls .maximize {
+    background: #27c93f;
+}
+
+.window-content {
+    padding: 20px;
+    color: var(--text-color);
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.window-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.window-content::-webkit-scrollbar-track {
+    background-color: var(--window-background);
+    border-radius: 10px;
+}
+
+.window-content::-webkit-scrollbar-thumb {
+    background-color: var(--window-header-background);
+    border-radius: 10px;
+}
+
+.window-content::-webkit-scrollbar-thumb:hover {
+    background-color: var(--dock-background);
+}
+
+/* Theme Styles */
+.vs-code-theme h1 {
+    color: var(--h1-color);
+}
+
+.vs-code-theme p {
+    color: var(--p-color);
+}
+
+.vs-code-theme k {
+    color: var(--keyword-color);
+}
+
+.vs-code-theme v {
+    color: var(--variable-color);
+}
+
+.vs-code-theme .keyword {
+    color: var(--keyword-color);
+}
+
+.window-content .container {
+    background-color: var(--window-background);
+    color: var(--text-color);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.window-content .main-title-box {
+    background-color: var(--window-header-background);
+    color: var(--text-color);
+}
+
+.window-content .card {
+    background-color: var(--window-background);
+    color: var(--text-color);
+}
+
+.window-content .skill {
+    background-color: var(--dock-background);
+    color: var(--text-color);
+}
+
+.window-content .social a {
+    color: var(--text-color);
+}
+
+.window-content .social a:hover {
+    background-color: var(--window-header-background);
+    color: var(--text-color);
+}
+
+/* ปุ่มสลับโหมด */
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px;
+    background: var(--window-header-background);
+    color: var(--text-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    transition: background 0.2s, transform 0.2s;
+}
+
+.theme-toggle:hover {
+    background: var(--dock-background);
+    transform: scale(1.1);
+}
+
+/* Image Modal Styles - Updated for 70% size */
+#image-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--modal-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+#image-modal.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal-content {
+    position: relative;
+    width: 85%; /* Increased from 70% to 85% */
+    height: 85%; /* Increased from 70% to 85% */
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#modal-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+}
+
+#close-modal {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: #e74c3c; /* สีแดงพื้นหลังวงกลม */
+    color: white;               /* ตัว X เป็นสีขาว */
+    font-size: 36px;            /* ขนาดตัวอักษรใหญ่ขึ้น */
+    font-weight: bold;
+    border-radius: 50%;         /* ทำเป็นวงกลม */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 2;
+    box-shadow: 0 0 15px rgba(0,0,0,0.6);
+    user-select: none;
+    border: none;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+#close-modal:hover {
+    transform: scale(1.1);
+    background-color: #c0392b; /* สีเข้มขึ้นเมื่อ hover */
+}
+
+.nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    font-size: 30px;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    padding: 15px;
+    cursor: pointer;
+    z-index: 1;
+    border-radius: 50%;
+}
+
+#prev-image {
+    left: 20px;
+}
+
+#next-image {
+    right: 20px;
+}
+
+.modal-controls {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+    z-index: 1;
+}
+
+.modal-controls button {
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    transition: all 0.3s;
+}
+
+.modal-controls button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+.modal-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.modal-nav button {
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    transition: all 0.3s;
+}
+
+.modal-nav button:hover {
+    background: var(--nav-btn-hover);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.clickable-image {
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.clickable-image:hover {
+    transform: scale(1.03);
+}
+
+/* คลาสช่วย */
+.hidden {
+    display: none;
+}
+
+.minimized {
+    display: none;
+}
+
+.maximized-width {
+    width: 95% !important;
+    height: 70% !important;
+    top: 70px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .window {
+        width: 90% !important;
+        height: 70% !important;
+    }
+
+    .dock {
+        gap: 10px;
+        padding: 8px;
+    }
+
+    .dock-icon img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .dock-label {
+        display: none;
+    }
+
+    /* Modal adjustments for mobile */
+    .modal-content {
+        width: 90vw;
+        height: 60vh;
+    }
+    
+    .modal-nav button {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+    }
+    
+    .modal-controls button {
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .dock {
+        gap: 8px;
+        padding: 5px;
+    }
+
+    .dock-icon img {
+        width: 25px;
+        height: 25px;
+    }
+
+    .dock-label {
+        display: none;
+    }
+
+    .dock-icon.selected {
+        background: #3e3e42;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Modal adjustments for small mobile */
+    .modal-content {
+        width: 95vw;
+        height: 50vh;
+    }
+    
+    .modal-nav button {
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
+    }
+    
+    .modal-controls button {
+        width: 30px;
+        height: 30px;
+        font-size: 16px;
+        top: 15px;
+        right: 15px;
+    }
+}

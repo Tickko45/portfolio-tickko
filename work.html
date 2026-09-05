@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="img/icon/file.png" type="image/x-icon">
+    <title>PERFORMANCE - ผลงาน</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* พื้นฐาน */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            padding: 20px;
+            line-height: 1.6;
+            font-family: "Kanit", sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            font-size: 16px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 90%;
+            margin: 0 auto;
+            margin-bottom: 100px;
+        }
+
+        /* หัวข้อหลัก - สีน้ำเงินโปร่งใส (เหมือนหน้า Education) */
+        .main-title-box {
+            background-color: rgba(33, 150, 243, 0.5); /* สีน้ำเงินโปร่งใส 50% */
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 
+                0 8px 25px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(33, 150, 243, 0.1);
+            margin-bottom: 30px;
+            margin-top: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        /* เอฟเฟกต์พื้นหลังเป็นเส้นตาข่ายโปร่งแสง */
+        .main-title-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        /* เอฟเฟกต์แสงลอย */
+        .floating-light {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+            filter: blur(20px);
+            animation: float-light 15s infinite linear;
+            z-index: -1;
+        }
+
+        .light-1 {
+            top: -50px;
+            left: -50px;
+            animation-delay: 0s;
+        }
+
+        .light-2 {
+            bottom: -50px;
+            right: -50px;
+            animation-delay: 5s;
+        }
+
+        .main-title-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 12px 35px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(33, 150, 243, 0.2),
+                0 0 20px rgba(33, 150, 243, 0.1);
+            background-color: rgba(33, 150, 243, 0.6);
+        }
+
+        /* ข้อความหัวข้อ */
+        .main-title {
+            font-weight: 500;
+            margin: 0;
+            color: #ffffff;
+            position: relative;
+            display: inline-block;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            letter-spacing: 1px;
+            line-height: 1.3;
+            z-index: 1;
+        }
+
+        /* เอฟเฟกต์เส้นแสงใต้ข้อความ */
+        .title-underline {
+            position: relative;
+            height: 2px;
+            width: 150px;
+            margin: 15px auto 0;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.8), 
+                transparent);
+            border-radius: 1px;
+            overflow: hidden;
+        }
+
+        .title-underline::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.6), 
+                transparent);
+            animation: shimmer-line 3s infinite;
+        }
+
+        .certificates-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .certificate-box {
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            background-color: #1e1e1e;
+            border: 1px solid #333;
+        }
+
+        .certificate-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5),
+                0 0 15px rgba(255, 255, 255, 0.3);
+            border-color: #4a6fa5;
+        }
+
+        /* เอฟเฟกต์เส้นแสงด้านซ้ายเมื่อ hover - เหมือนหน้า Education */
+        .certificate-box::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background-color: #4a6fa5;
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .certificate-box:hover::before {
+            transform: scaleY(1);
+        }
+
+        /* สไตล์สำหรับโลโก้กรมด้านซ้ายบน - ปรับให้พอดี */
+        .department-logo {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            width: 55px;
+            height: auto;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            z-index: 15;
+        }
+
+        .department-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 8px;
+        }
+
+        /* ถ้าไม่มีรูปให้แสดงเป็นตัวอักษรย่อ */
+        .department-logo.no-image {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            text-align: center;
+            line-height: 1.2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .certificate-title h1 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            padding-right: 50px; /* เว้นที่สำหรับเหรียญ */
+            padding-left: 50px; /* เว้นที่สำหรับโลโก้ */
+            color: #ffffff;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .certificate-description {
+            font-size: 14px;
+            margin-top: 10px;
+            color: #b0b0b0;
+        }
+
+        .certificate-box img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .certificate-box img:hover {
+            transform: scale(1.03);
+        }
+
+        /* ปุ่มเปลี่ยนรูปภาพ - ปรับให้มีเส้นสีน้ำเงินด้านข้างเมื่อ hover */
+        .image-btn {
+            background: linear-gradient(135deg, #2c80ff 0%, #1a5fd8 100%);
+            color: #ffffff;
+            border: none;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 5px;
+            border-radius: 8px;
+            font-family: "Kanit", sans-serif;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* เอฟเฟกต์เส้นสีน้ำเงินด้านข้างเมื่อ hover - เหมือนหน้า Education */
+        .image-btn::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background-color: #2196f3;
+            transform: scaleY(0);
+            transition: transform 0.2s ease;
+            border-radius: 8px 0 0 8px;
+        }
+
+        .image-btn:hover::before {
+            transform: scaleY(1);
+        }
+
+        .image-btn:hover {
+            background: linear-gradient(135deg, #3a90ff 0%, #2a6fdf 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(44, 128, 255, 0.3);
+        }
+
+        .image-btn.active {
+            background: linear-gradient(135deg, #1a5fd8 0%, #0d47a1 100%);
+            box-shadow: 
+                inset 0 1px 3px rgba(0, 0, 0, 0.4),
+                0 2px 5px rgba(13, 71, 161, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* เส้นสีน้ำเงินสำหรับปุ่ม active ด้วย */
+        .image-btn.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background-color: #64b5f6;
+            transform: scaleY(1);
+            transition: transform 0.2s ease;
+            border-radius: 8px 0 0 8px;
+        }
+
+        /* เอฟเฟกต์แสงลอยบนปุ่ม */
+        .image-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.1), 
+                transparent);
+            transition: left 0.5s ease;
+        }
+
+        .image-btn:hover::after {
+            left: 100%;
+        }
+
+        .youtube {
+            font-size: 16px;
+            padding: 8px;
+            background-color: #FF0033;
+            color: #f7f7f7;
+            text-decoration: none;
+            align-items: center;
+            transition: transform 0.3s ease, background-color 0.3s ease, border 0.3s ease;
+            border-radius: 10px;
+            border: 2px solid white;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .youtube:hover {
+            background-color: #f7f7f7;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border: 2px solid white;
+            color: #FF0033;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        /* สไตล์สำหรับสัญลักษณ์กลมๆ ด้านหน้า */
+        .achievement-circle {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 65px;
+            height: 65px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            z-index: 12;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            border: 3px solid white;
+            transform: rotate(0deg);
+            transition: transform 0.3s ease;
+            overflow: hidden;
+        }
+
+        .achievement-circle:hover {
+            transform: scale(1.1);
+        }
+
+        .achievement-circle.rank-4 {
+            background: radial-gradient(circle at 30% 30%, #4a90e2, #2c3e50);
+            border-color: #f1c40f;
+        }
+
+        .achievement-circle.gold {
+            background: radial-gradient(circle at 30% 30%, #FFD700, #FFA500);
+            border-color: #fff;
+        }
+
+        .achievement-circle.bronze {
+            background: radial-gradient(circle at 30% 30%, #CD7F32, #8B4513);
+            border-color: #fff;
+        }
+
+        .circle-icon {
+            font-size: 20px;
+            color: white;
+            margin-bottom: 3px;
+            filter: drop-shadow(0 2px 2px rgba(0,0,0,0.5));
+            text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+        }
+
+        .circle-text {
+            font-size: 11px;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            line-height: 1.1;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+        }
+
+        .circle-text.rank-4 {
+            color: #f1c40f;
+            font-size: 12px;
+        }
+
+        /* สไตล์สำหรับแถบคาดเฉียงด้านหลัง */
+        .diagonal-band {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 80px;
+            height: 25px;
+            background: rgba(255, 255, 255, 0.15);
+            z-index: 11;
+            transform: rotate(45deg);
+            border-radius: 3px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .achievement-circle.rank-4 .diagonal-band {
+            background: rgba(241, 196, 15, 0.8);
+        }
+
+        .achievement-circle.gold .diagonal-band {
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .achievement-circle.bronze .diagonal-band {
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        /* เอฟเฟกต์แสงสะท้อนบนวงกลม */
+        .achievement-circle::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.1) 50%, transparent 60%);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        /* เงาใต้แถบคาดเฉียง */
+        .diagonal-band::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            right: 2px;
+            bottom: 2px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            z-index: -1;
+        }
+
+        /* เอฟเฟกต์เงาลอย */
+        .achievement-circle::after {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.1);
+            border-radius: 50%;
+            z-index: -2;
+            filter: blur(2px);
+        }
+
+        /* สไตล์สำหรับแถบรูปภาพ */
+        .image-ribbon {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #FF0033;
+            color: white;
+            padding: 5px 15px;
+            font-size: 12px;
+            font-weight: bold;
+            border-radius: 3px;
+            transform: rotate(45deg);
+            transform-origin: top right;
+            z-index: 13;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        /* Animations */
+        @keyframes float-light {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(50px, 30px) rotate(90deg);
+            }
+            50% {
+                transform: translate(100px, 0) rotate(180deg);
+            }
+            75% {
+                transform: translate(50px, -30px) rotate(270deg);
+            }
+            100% {
+                transform: translate(0, 0) rotate(360deg);
+            }
+        }
+
+        @keyframes shimmer-line {
+            0% {
+                left: -100%;
+            }
+            100% {
+                left: 100%;
+            }
+        }
+
+        /* Animation สำหรับการแสดงผลการ์ด */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .certificate-box {
+            animation: fadeInUp 0.5s ease forwards;
+            opacity: 0;
+        }
+
+        .certificate-box:nth-child(1) { animation-delay: 0.1s; }
+        .certificate-box:nth-child(2) { animation-delay: 0.2s; }
+        .certificate-box:nth-child(3) { animation-delay: 0.3s; }
+        .certificate-box:nth-child(4) { animation-delay: 0.4s; }
+        .certificate-box:nth-child(5) { animation-delay: 0.5s; }
+        .certificate-box:nth-child(6) { animation-delay: 0.6s; }
+        .certificate-box:nth-child(7) { animation-delay: 0.7s; }
+        .certificate-box:nth-child(8) { animation-delay: 0.8s; }
+        .certificate-box:nth-child(9) { animation-delay: 0.9s; }
+        .certificate-box:nth-child(10) { animation-delay: 1.0s; }
+        .certificate-box:nth-child(11) { animation-delay: 1.1s; }
+        .certificate-box:nth-child(12) { animation-delay: 1.2s; }
+
+        @media (max-width: 700px) {
+            .certificates-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .certificate-title h1 {
+                font-size: 16px;
+                padding-right: 60px;
+                padding-left: 60px;
+                min-height: 50px;
+            }
+
+            .certificate-description {
+                font-size: 14px;
+            }
+
+            .image-btn {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+
+            .achievement-circle {
+                width: 55px;
+                height: 55px;
+                top: 12px;
+                right: 12px;
+            }
+
+            .circle-icon {
+                font-size: 16px;
+            }
+
+            .circle-text {
+                font-size: 9px;
+            }
+
+            .circle-text.rank-4 {
+                font-size: 10px;
+            }
+
+            .diagonal-band {
+                width: 70px;
+                height: 20px;
+                top: 8px;
+                right: 8px;
+            }
+
+            .image-ribbon {
+                padding: 4px 12px;
+                font-size: 10px;
+            }
+
+            .floating-light {
+                display: none;
+            }
+
+            .department-logo {
+                width: 45px;
+                height: 45px;
+                top: 10px;
+                left: 10px;
+            }
+
+            .department-logo img {
+                padding: 6px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .certificates-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .certificate-title h1 {
+                font-size: 16px;
+                padding-right: 55px;
+                padding-left: 55px;
+                min-height: 45px;
+            }
+
+            .certificate-description {
+                font-size: 14px;
+            }
+
+            .image-btn {
+                font-size: 10px;
+                padding: 5px 10px;
+            }
+
+            .achievement-circle {
+                width: 50px;
+                height: 50px;
+                top: 10px;
+                right: 10px;
+            }
+
+            .circle-icon {
+                font-size: 14px;
+            }
+
+            .circle-text {
+                font-size: 8px;
+            }
+
+            .circle-text.rank-4 {
+                font-size: 9px;
+            }
+
+            .diagonal-band {
+                width: 65px;
+                height: 18px;
+                top: 6px;
+                right: 6px;
+            }
+
+            .image-ribbon {
+                padding: 3px 10px;
+                font-size: 9px;
+            }
+
+            .department-logo {
+                width: 40px;
+                height: 40px;
+                top: 8px;
+                left: 8px;
+            }
+
+            .department-logo img {
+                padding: 5px;
+            }
+        }
+
+        /* สำหรับหน้าจอใหญ่ให้เล็กลงหน่อยเพื่อไม่บังเนื้อหา */
+        @media (min-width: 1200px) {
+            .achievement-circle {
+                width: 60px;
+                height: 60px;
+                top: 12px;
+                right: 12px;
+            }
+
+            .circle-text {
+                font-size: 10px;
+            }
+
+            .circle-text.rank-4 {
+                font-size: 11px;
+            }
+
+            .diagonal-band {
+                width: 75px;
+                height: 22px;
+                top: 8px;
+                right: 8px;
+            }
+        }
+
+        /* สำหรับหน้าจอขนาดกลาง */
+        @media (min-width: 701px) and (max-width: 1199px) {
+            .achievement-circle {
+                width: 58px;
+                height: 58px;
+                top: 10px;
+                right: 10px;
+            }
+
+            .circle-text {
+                font-size: 9px;
+            }
+
+            .circle-text.rank-4 {
+                font-size: 10px;
+            }
+
+            .diagonal-band {
+                width: 70px;
+                height: 20px;
+                top: 6px;
+                right: 6px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- หัวข้อหลักแบบสีน้ำเงินโปร่งใส (เหมือนหน้า Education) -->
+        <div class="main-title-box">
+            <div class="floating-light light-1"></div>
+            <div class="floating-light light-2"></div>
+            <div class="main-title">PERFORMANCE - ผลงาน</div>
+            <div class="title-underline"></div>
+        </div>
+        
+        <div class="certificates-grid">
+
+            <div class="certificate-box" data-images='["img/work/nacc.png"]'>
+                <!-- โลโก้กรมด้านซ้ายบน -->
+                <div class="department-logo">
+                    <img src="img/intern/nacc.png" alt="โลโก้ ป.ป.ช." onerror="this.parentElement.classList.add('no-image'); this.outerHTML='ป.ป.ช.'">
+                </div>
+                <!-- วงกลมด้านหน้า -->
+                <div class="achievement-circle rank-4">
+                    <i class="fas fa-trophy circle-icon"></i>
+                    <div class="circle-text rank-4">ลำดับที่<br>9</div>
+                </div>
+                <div class="certificate-title">
+                    <h1>สอบราชการ</h1>
+                </div>
+                <img src="img/work/nacc.png" alt="รูปภาพประกาศผลสอบราชการ" class="clickable-image"/>
+                <div class="certificate-description">
+                    <h4>ลำดับที่ 9 </h4>
+                    <h4>ตำแหน่งเจ้าพนักงานเครื่องคอมพิวเตอร์ปฏิบัติงาน</h4>
+                    <k>สอบแข่งขันเพื่อบรรจุเข้ารับราชการเป็นข้าราชการพลเรือนสามัญ</k>
+                    <h4>สังกัดสำนักงานคณะกรรมการป้องกัน และปราบปรามการทุจริตแห่งชาติ (สำนักงาน ป.ป.ช.)</h4>
+                </div>
+                <br>
+                <a class="youtube" href="https://file.thaijobjob.com/prakad/nacc2025121/nacc2025121_39" target="_blank">หนังสือเรียกรายงานตัว</a>
+                <a class="youtube" href="https://file.thaijobjob.com/prakad/nacc2025121/nacc2025121_46" target="_blank">ประกาศผลการสอบ</a>
+            </div>
+
+            <div class="certificate-box" data-images='["img/work/lands.png"]'>
+                <!-- โลโก้กรมด้านซ้ายบน -->
+                <div class="department-logo">
+                    <img src="img/intern/dol.png" alt="โลโก้กรมที่ดิน" onerror="this.parentElement.classList.add('no-image'); this.outerHTML='ที่ดิน'">
+                </div>
+                <!-- วงกลมด้านหน้า -->
+                <div class="achievement-circle rank-4">
+                    <i class="fas fa-trophy circle-icon"></i>
+                    <div class="circle-text rank-4">ลำดับที่<br>4</div>
+                </div>
+                <div class="certificate-title">
+                    <h1>สอบราชการ</h1>
+                </div>
+                <img src="img/work/lands.png" alt="รูปภาพประกาศผลสอบราชการ" class="clickable-image"/>
+                <div class="certificate-description">
+                    <k>(หน้าที่ 22)</k>
+                    <h4>ลำดับที่ 4 </h4>
+                    <h4>ตำแหน่งเจ้าพนักงานเครื่องคอมพิวเตอร์ปฏิบัติงาน</h4>
+                    <k>สอบแข่งขันเพื่อบรรจุเข้ารับราชการเป็นข้าราชการพลเรือนสามัญ</k>
+                    <h4>สังกัดกรมที่ดิน</h4>
+                </div>
+                <br>
+                <a class="youtube" href="https://file.thaijobjob.com/prakad/dol202504/dol202504_5" target="_blank">ประกาศผลการสอบ</a>
+            </div>
+
+            <div class="certificate-box" data-images='["img/work/pj-2568.png"]'>
+                <!-- โลโก้กรมด้านซ้ายบน - สำหรับบทความวิจัย -->
+                <div class="department-logo">
+                    <img src="img/edu/psru.png" alt="โลโก้มหาวิทยาลัย" onerror="this.parentElement.classList.add('no-image'); this.outerHTML='ม.'">
+                </div>
+                <div class="certificate-title">
+                    <h1>บทความวิจัย - Project จบปี 2568</h1>
+                </div>
+                <img src="img/work/pj-2568.png" alt="รูปภาพประกาศผลสอบราชการ" class="clickable-image"/>
+                <div class="certificate-description">
+                    <h4>ระบบตรวจสอบอัคคีภัยสำหรับหมู่บ้านจัดสรรโดยใช้เทคโนโลยีอินเทอร์เน็ตของสรรพสิ่งและคลาวด์คอมพิวติ้ง</h4>
+                    <k>ขอขอบคุณคณาจารย์ประจำสาขาวิชาเทคโนโลยีสารสนเทศ มหาวิทยาลัยราชภัฏพิบูลสงคราม
+                        ที่ให้ความรู้ คำปรึกษา และการสนับสนุนด้านอุปกรณ์และสถานที่ในการพัฒนาระบบ</k>
+                </div>
+                <br>
+                <a class="youtube" href="https://ph02.tci-thaijo.org/index.php/nkrafa-sct/article/view/258105" target="_blank">บทความวิจัยที่เผยแพร่แล้ว</a>
+            </div>
+
+            <div class="certificate-box" data-images='["img/work/yt.jpg"]'>
+                <!-- โลโก้ YouTube -->
+                <div class="department-logo">
+                    <img src="img/intern/youtube.png" alt="โลโก้ YouTube" onerror="this.parentElement.classList.add('no-image'); this.outerHTML='YT'">
+                </div>
+                <div class="certificate-title">
+                    <h1>YOUTUBE</h1>
+                </div>
+                <img src="img/work/yt.jpg" alt="รูปภาพช่อง YouTube" class="clickable-image"/>
+                <div class="certificate-description">
+                    <k>สร้างช่อง YOUTUBE ให้ความรู้เรื่องเกี่ยวกับการเขียนโปรแกรม และใช้เครื่องมือต่าง ๆ</k>
+                </div>
+                <br>
+                <a class="youtube" href="https://www.youtube.com/@BUGDOWN404" target="_blank"><i
+                        class="fab fa-youtube"></i> BUGDOWN</a>
+            </div>
+
+            <div class="certificate-box" data-images='["img/work/ocsc-dip.jpg"]'>
+                <!-- โลโก้ ก.พ. -->
+                <div class="department-logo">
+                    <img src="img/intern/ocsc.png" alt="โลโก้ ก.พ." onerror="this.parentElement.classList.add('no-image'); this.outerHTML='ก.พ.'">
+                </div>
+                <div class="certificate-title">
+                    <h1>สอบผ่าน ก.พ. ภาค ก (ปวส.)</h1>
+                </div>
+                <img src="img/work/ocsc-dip.jpg" alt="รูปภาพประกาศผลสอบ ก.พ." class="clickable-image"/>
+                <div class="certificate-description">
+                    <k>ผ่านการสอบเพื่อวัดความรู้ความสามารถทั่วไป ก.พ. <br>
+                        ระดับประกาศนียบัตรวิชาชีพชั้นสูง</k>
+                </div>
+            </div>
+
+            <div class="certificate-box" data-images='["img/work/inv-2566.jpg", "img/work/cer-inv-2566.jpg", "img/work/inv-2566-3.jpg"]'>
+                <!-- โลโก้หน่วยงาน -->
+                <div class="department-logo">
+                    <img src="img/intern/inv.png" alt="โลโก้สิ่งประดิษฐ์" onerror="this.parentElement.classList.add('no-image'); this.outerHTML='สิ่ง<br>ประดิษฐ์'">
+                </div>
+                <!-- วงกลมด้านหน้า -->
+                <div class="achievement-circle gold">
+                    <i class="fas fa-medal circle-icon"></i>
+                    <div class="circle-text">เหรียญ<br>ทอง</div>
+                </div>
+                <div class="certificate-title">
+                    <h1>การประกวดสิ่งประดิษฐ์ของคนรุ่นใหม่ <br />ระดับภาคกลาง ประจำปีการศึกษา 2565</h1>
+                </div>
+                <img src="img/work/inv-2566.jpg" alt="รูปภาพประกวดสิ่งประดิษฐ์" class="clickable-image"/>
+                <div class="certificate-description">
+                    <k>IoT <br>ระบบป้องกันเด็กติดในรถ Smart safe kids</k>
+                </div>
+                <div class="btn-container">
+                    <button class="image-btn active" onclick="switchImage(this.parentNode.parentNode, 0)">รูปที่ 1</button>
+                    <button class="image-btn" onclick="switchImage(this.parentNode.parentNode, 1)">รูปที่ 2</button>
+                    <button class="image-btn" onclick="switchImage(this.parentNode.parentNode, 2)">รูปที่ 3</button>
+                </div>
+            </div>
+
+            <div class="certificate-box" data-images='["img/work/inv-2564.jpg", "img/work/cer-inv-2564.jpg"]'>
+                <!-- โลโก้หน่วยงาน -->
+                <div class="department-logo">
+                    <img src="img/intern/inv.png" alt="โลโก้สิ่งประดิษฐ์" onerror="this.parentElement.classList.add('no-image'); this.outerHTML='สิ่ง<br>ประดิษฐ์'">
+                </div>
+                <!-- วงกลมด้านหน้า -->
+                <div class="achievement-circle bronze">
+                    <i class="fas fa-medal circle-icon"></i>
+                    <div class="circle-text">เหรียญ<br>ทองแดง</div>
+                </div>
+                <div class="certificate-title">
+                    <h1>
+                        การประกวดสิ่งประดิษฐ์ของคนรุ่นใหม่ <br />
+                        ระดับชาติ ประจำปีการศึกษา 2564</h1>
+                </div>
+                <img src="img/work/inv-2564.jpg" alt="รูปภาพประกวดสิ่งประดิษฐ์ระดับชาติ" class="clickable-image"/>
+                <div class="certificate-description">
+                    <k>Website <br>
+                        เว็บแอพพลิเคชันฝากขายข้าวเพื่อชุมชนจังหวัดสุพรรณบุรี</k>
+                </div>
+                <div class="btn-container">
+                    <button class="image-btn active" onclick="switchImage(this.parentNode.parentNode, 0)">รูปที่ 1</button>
+                    <button class="image-btn" onclick="switchImage(this.parentNode.parentNode, 1)">รูปที่ 2</button>
+                </div>
+            </div>
+
+            <div class="certificate-box" data-images='["img/work/oph-psru-2568-1.jpg", "img/work/oph-psru-2568-2.jpg", "img/work/oph-psru-2568-3.jpg"]'>
+                <!-- โลโก้มหาวิทยาลัย -->
+                <div class="department-logo">
+                    <img src="img/edu/psru.png" alt="โลโก้มหาวิทยาลัย" onerror="this.parentElement.classList.add('no-image'); this.outerHTML='ม.'">
+                </div>
+                <div class="certificate-title">
+                    <h1>จัดบูธสาขาวิชาเทคโนโลยีสารสนเทศ <br>
+                        มหาวิทยาลัยราชภัฏพิบูลสงคราม ประจำปี 2568</h1>
+                </div>
+                <img src="img/work/oph-psru-2568-1.jpg" alt="รูปภาพจัดบูธมหาวิทยาลัย" class="clickable-image"/>
+                <div class="certificate-description">
+                    <k>เข้าร่วมจัดบูธแนะแนวการเข้าศึกษาต่อสาขาวิชาเทคโนโลยีสารสนเทศ คณะวิทยาศาสตร์และเทคโนโลยี
+                        มหาวิทยาลัยราชภัฏพิบูลสงคราม</k>
+                </div>
+                <div class="btn-container">
+                    <button class="image-btn active" onclick="switchImage(this.parentNode.parentNode, 0)">รูปที่ 1</button>
+                    <button class="image-btn" onclick="switchImage(this.parentNode.parentNode, 1)">รูปที่ 2</button>
+                    <button class="image-btn" onclick="switchImage(this.parentNode.parentNode, 2)">รูปที่ 3</button>
+                </div>
+            </div>
+
+            <div class="certificate-box" data-images='["img/work/oph-psru-2567.jpg"]'>
+                <!-- โลโก้มหาวิทยาลัย -->
+                <div class="department-logo">
+                    <img src="img/edu/psru.png" alt="โลโก้มหาวิทยาลัย" onerror="this.parentElement.classList.add('no-image'); this.outerHTML='ม.'">
+                </div>
+                <div class="certificate-title">
+                    <h1>จัดบูธสาขาวิชาเทคโนโลยีสารสนเทศ <br>
+                        มหาวิทยาลัยราชภัฏพิบูลสงคราม ประจำปี 2567</h1>
+                </div>
+                <img src="img/work/oph-psru-2567.jpg" alt="รูปภาพจัดบูธมหาวิทยาลัย" class="clickable-image"/>
+                <div class="certificate-description">
+                    <k>ข้าร่วมจัดบูธแนะแนวการเข้าศึกษาต่อสาขาวิชาเทคโนโลยีสารสนเทศ คณะวิทยาศาสตร์และเทคโนโลยี
+                        มหาวิทยาลัยราชภัฏพิบูลสงคราม</k>
+                </div>
+            </div>
+
+            <div class="certificate-box" data-images='["img/work/oph-spvc-pgm.jpg"]'>
+                <!-- โลโก้วิทยาลัย -->
+                <div class="department-logo">
+                    <img src="img/edu/spvc.png" alt="โลโก้วิทยาลัย" onerror="this.parentElement.classList.add('no-image'); this.outerHTML='ว.'">
+                </div>
+                <div class="certificate-title">
+                    <h1>จัดบูธแผนกวิชาชีพโปรแกรมเมอร์ <br>
+                        วิทยาลัยอาชีวศึกษาสุพรรณบุรี</h1>
+                </div>
+                <img src="img/work/oph-spvc-pgm.jpg" alt="รูปภาพจัดบูธวิทยาลัย" class="clickable-image"/>
+                <div class="certificate-description">
+                    <k>จัดบูธแผนกวิชาชีพโปรแกรมเมอร์</k>
+                </div>
+            </div>
+
+            <div class="certificate-box" data-images='["img/work/oph-spvc-1.jpg", "img/work/oph-spvc-2.jpg"]'>
+                <!-- โลโก้วิทยาลัย -->
+                <div class="department-logo">
+                    <img src="img/edu/spvc.png" alt="โลโก้วิทยาลัย" onerror="this.parentElement.classList.add('no-image'); this.outerHTML='ว.'">
+                </div>
+                <div class="certificate-title">
+                    <h1>แนะแนว - Sa-Nguan Ying Open House 2566</h1>
+                </div>
+                <img src="img/work/oph-spvc-1.jpg" alt="รูปภาพแนะแนว" class="clickable-image" />
+                <div class="certificate-description">
+                    <k>เข้าร่วมจัดบูธแนะแนวการเข้าศึกษาต่อวิทยาลัยอาชีวศึกษาสุพรรณบุรี</k>
+                </div>
+                <div class="btn-container">
+                    <button class="image-btn active" onclick="switchImage(this.parentNode.parentNode, 0)">รูปที่ 1</button>
+                    <button class="image-btn" onclick="switchImage(this.parentNode.parentNode, 1)">รูปที่ 2</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ไม่ต้องมีสคริปต์ JavaScript ในไฟล์นี้ -->
+
+    
+</body>
+
+</html>

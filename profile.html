@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500&display=swap">
+    <link rel="icon" href="img/icon/file.png" type="image/x-icon">
+    <title>PROFILE - โปรไฟล์</title>
+</head>
+
+<style>
+    .container {
+        max-width: 90%;
+        margin: 0 auto;
+    }
+
+    /* หน้า Profile */
+    .main-title-box,
+    .card {
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    .main-title-box {
+        background-color: #ffffff21;
+        border-radius: 10px;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        width: 100%;
+    }
+
+    .main-title {
+        font-size: 20px;
+        font-weight: 600;
+        margin: 0;
+    }
+
+    .card {
+        background-color: #ffffff21;
+        border-radius: 12px;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 2rem;
+        flex-wrap: wrap;
+        padding: 20px;
+    }
+
+    .skillz {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 1.5rem;
+        width: 100%;
+    }
+
+    .skill {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .skill:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .skill img {
+        width: 60px;
+        /* กำหนดความกว้าง */
+        height: auto;
+        /* กำหนดความสูง */
+        object-fit: cover;
+        /* ทำให้รูปภาพเต็มกรอบ และรักษาสัดส่วน */
+        margin-bottom: 10px;
+    }
+
+    .info {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 1.5rem;
+        align-items: flex-start;
+        width: 65%;
+        flex-grow: 1;
+    }
+
+    .skill-title {
+        font-size: 20px;
+        margin-bottom: -10px;
+        font-weight: bold;
+        text-align: center;
+        /* ทำให้ข้อความอยู่ตรงกลาง */
+    }
+
+    .meta {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width: 30%;
+    }
+
+    .avatar {
+        border-radius: 50%;
+        width: 200px;
+        height: auto;
+        object-fit: cover;
+    }
+
+    .name {
+        font-size: 2rem;
+        margin-top: 1rem;
+        font-weight: 600;
+    }
+
+    .title {
+        font-size: 1.2rem;
+        margin-top: 0.5rem;
+        font-weight: 400;
+    }
+
+    .social {
+        display: flex;
+        justify-content: center;
+        /* จัดตำแหน่งให้ไอคอนอยู่กลาง */
+        gap: 20px;
+        /* ระยะห่างระหว่างไอคอน */
+        list-style: none;
+        padding: 0;
+        flex-wrap: wrap;
+    }
+
+    .social a {
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: transform 0.3s ease, background-color 0.3s ease, border 0.3s ease;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    .social a:hover {
+        transform: scale(1.2);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .social i {
+        font-size: 35px;
+    }
+
+    /* ปรับการแสดงผลเมื่อหน้าจอมีขนาดเล็ก (มือถือ) */
+    @media (max-width: 768px) {
+
+        /* หน้า Profile */
+        .meta,
+        .info {
+            width: 90%;
+            text-align: center;
+            /* เพิ่มการจัดตำแหน่งข้อความให้ตรงกลาง */
+        }
+
+        .skill-title {
+            text-align: center;
+            /* ทำให้หัวข้อ "ความสามารถ" อยู่ตรงกลาง */
+        }
+
+        .social {
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            align-items: center;
+            width: 100%;
+        }
+
+        .social a {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
+    @media (max-width: 480px) {
+
+        /* หน้า Profile */
+        .main-title-box,
+        .card {
+            width: 90%;
+        }
+
+        .skill-title {
+            text-align: center;
+            /* ทำให้หัวข้อ "ความสามารถ" อยู่ตรงกลาง */
+        }
+
+        .social {
+            flex-direction: row;
+            justify-content: space-between;
+            width: 80%;
+            text-align: center;
+            /* เพิ่มการจัดตำแหน่งให้ตรงกลาง */
+        }
+
+        .social a {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+        }
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="main-title-box">
+            <div class="main-title">PROFILE - โปรไฟล์</div>
+        </div>
+
+        <div class="card">
+            <div class="meta">
+                <picture>
+                    <img class="avatar" src="/img/profile/Prf.jpg" alt="Profile Picture" />
+                </picture>
+                <div>
+                    <h1 class="name">ติ๊ก</h1>
+                    <h2 class="title">ยุทธจักร อินทร์คง</h2>
+                    <h2 class="title">อายุ 23 ปี</h2>
+                </div>
+            </div>
+
+            <div class="info">
+                <div class="main-title-box">
+                    <div class="main-title">ความสามารถ</div>
+                </div>
+
+                <div class="skillz">
+
+                    <div class="skill">
+                        <img src="/img/profile/cisco.png" />
+                        <p>CISCO</p>
+                    </div>
+
+                    <div class="skill">
+                        <img src="/img/profile/zte.png" />
+                        <p>ZTE</p>
+                    </div>
+
+                    <div class="skill">
+                        <img src="/img/profile/ln.png" />
+                        <p>LINUX</p>
+                    </div>
+
+                    <div class="skill">
+                        <img src="/img/profile/html.png" />
+                        <p>HTML</p>
+                    </div>
+
+                    <div class="skill">
+                        <img src="/img/profile/css.png" />
+                        <p>CSS</p>
+                    </div>
+                    <div class="skill">
+                        <img src="/img/profile/VSCode.png" />
+                        <p>VSCode</p>
+                    </div>
+
+                    <div class="skill">
+                        <img src="/img/profile/adn.png" />
+                        <p>Arduino IDE</p>
+                    </div>
+                    <div class="skill">
+                        <img src="/img/profile/Appsheet.png" />
+                        <p>App Sheet</p>
+                    </div>
+                </div>
+
+                <div class="main-title-box">
+                    <div class="main-title">ติดต่อ</div>
+                </div>
+
+                <ul class="social">
+                    <li><a href="mailto:yuttachak.forwork@gmail.com" target="_blank"><i class="fas fa-envelope"></i>
+                            yuttachak.forwork@gmail.com</a></li>
+                    <li><a href="https://www.facebook.com/tickko.yuttachak/" target="_blank"><i
+                                class="fab fa-facebook"></i> Tickko Yuttachak</a></li>
+                                <li><a href="https://line.me/ti/p/TdWSrYuEyS" target="_blank"><i
+                                    class="fab fa-line"></i> tik_4615</a></li>
+                    <li><a href="https://www.youtube.com/@BUGDOWN404" target="_blank"><i class="fab fa-youtube"></i>
+                            BUGDOWN</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

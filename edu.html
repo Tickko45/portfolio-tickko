@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500&display=swap">
+    <link rel="icon" href="img/icon/file.png" type="image/x-icon">
+    <title>EDUCATION - ประวัติการศึกษา</title>
+    <style>
+        /* พื้นฐาน */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            padding: 20px;
+            line-height: 1.6;
+            font-family: "Kanit", sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            font-size: 16px;
+            min-height: 100vh;
+        }
+
+        /* คอนเทนเนอร์หลัก */
+        .education-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding-bottom: 30px;
+        }
+
+        /* หัวข้อหลัก - สีน้ำเงินโปร่งใส */
+        .main-title-box {
+            background-color: rgba(33, 150, 243, 0.5); /* สีน้ำเงินโปร่งใส 50% */
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 
+                0 8px 25px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(33, 150, 243, 0.1);
+            margin-bottom: 30px;
+            margin-top: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        /* เอฟเฟกต์พื้นหลังเป็นเส้นตาข่ายโปร่งแสง */
+        .main-title-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        /* เอฟเฟกต์แสงลอย */
+        .floating-light {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+            filter: blur(20px);
+            animation: float-light 15s infinite linear;
+            z-index: -1;
+        }
+
+        .light-1 {
+            top: -50px;
+            left: -50px;
+            animation-delay: 0s;
+        }
+
+        .light-2 {
+            bottom: -50px;
+            right: -50px;
+            animation-delay: 5s;
+        }
+
+        .main-title-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 12px 35px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(33, 150, 243, 0.2),
+                0 0 20px rgba(33, 150, 243, 0.1);
+            background-color: rgba(33, 150, 243, 0.6);
+        }
+
+        /* ข้อความหัวข้อ */
+        .main-title {
+            font-size: 32px;
+            font-weight: 500;
+            margin: 0;
+            color: #ffffff;
+            position: relative;
+            display: inline-block;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            letter-spacing: 1px;
+            line-height: 1.3;
+            z-index: 1;
+        }
+
+        /* เอฟเฟกต์เส้นแสงใต้ข้อความ */
+        .title-underline {
+            position: relative;
+            height: 2px;
+            width: 150px;
+            margin: 15px auto 0;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.8), 
+                transparent);
+            border-radius: 1px;
+            overflow: hidden;
+        }
+
+        .title-underline::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.6), 
+                transparent);
+            animation: shimmer-line 3s infinite;
+        }
+
+        /* การ์ดการศึกษา */
+        .education-card {
+            display: flex;
+            align-items: center;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            margin: 20px 0;
+            padding: 25px;
+            background-color: #1e1e1e;
+            transition: all 0.3s ease;
+            border: 1px solid #333;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .education-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            border-color: #4a6fa5;
+        }
+
+        /* เอฟเฟกต์เส้นแสงด้านซ้ายเมื่อ hover */
+        .education-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background-color: #4a6fa5;
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .education-card:hover::before {
+            transform: scaleY(1);
+        }
+
+        /* โลโก้ */
+        .logo-wrapper {
+            flex-shrink: 0;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 25px;
+        }
+
+        .logo-circle {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #252525;
+            padding: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .education-card:hover .logo-circle {
+            border-color: rgba(74, 111, 165, 0.3);
+            transform: scale(1.05);
+        }
+
+        .logo-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            border-radius: 50%;
+        }
+
+        /* รายละเอียด */
+        .details {
+            flex: 1;
+            text-align: left;
+            padding-right: 15px;
+        }
+
+        .details h2 {
+            font-size: 20px;
+            margin: 0 0 8px 0;
+            color: #ffffff;
+            line-height: 1.2;
+            font-weight: 500;
+        }
+
+        .details p {
+            margin: 5px 0;
+            font-size: 16px;
+            color: #b0b0b0;
+            line-height: 1.4;
+        }
+
+        /* ระยะเวลาเรียน - ปรับปรุงใหม่ */
+        .study-period-container {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .study-period {
+            margin: 0 0 5px 0;
+            font-size: 14.5px;
+            color: #bbdefb;
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+        }
+
+        .study-period::before {
+            content: '📅';
+            margin-right: 8px;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .graduation-year {
+            font-size: 14px;
+            color: #81c784;
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            margin-top: 3px;
+        }
+
+        .graduation-year::before {
+            content: '🎓';
+            margin-right: 8px;
+            font-size: 13px;
+        }
+
+        /* GPA */
+        .gpa {
+            text-align: center;
+            min-width: 70px;
+            flex-shrink: 0;
+        }
+
+        .gpa p {
+            margin: 0 0 5px 0;
+            font-size: 14px;
+            color: #9e9e9e;
+        }
+
+        .gpa span {
+            display: block;
+            font-size: 24px;
+            font-weight: bold;
+            color: #4a6fa5;
+            transition: transform 0.3s ease;
+        }
+
+        .education-card:hover .gpa span {
+            transform: scale(1.1);
+        }
+
+        /* Animations */
+        @keyframes float-light {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(50px, 30px) rotate(90deg);
+            }
+            50% {
+                transform: translate(100px, 0) rotate(180deg);
+            }
+            75% {
+                transform: translate(50px, -30px) rotate(270deg);
+            }
+            100% {
+                transform: translate(0, 0) rotate(360deg);
+            }
+        }
+
+        @keyframes shimmer-line {
+            0% {
+                left: -100%;
+            }
+            100% {
+                left: 100%;
+            }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #2a2a2a;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #4a4a4a;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #5a5a5a;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+                font-size: 15px;
+            }
+
+            .education-container {
+                max-width: 100%;
+                padding-bottom: 20px;
+            }
+
+            .main-title-box {
+                padding: 25px 20px;
+                margin-bottom: 25px;
+            }
+
+            .education-card {
+                padding: 20px;
+                margin: 15px 0;
+            }
+
+            .logo-wrapper {
+                width: 70px;
+                height: 70px;
+                margin-right: 20px;
+            }
+
+            .details h2 {
+                font-size: 18px;
+            }
+
+            .details p {
+                font-size: 15px;
+            }
+
+            .study-period {
+                font-size: 14px;
+            }
+
+            .graduation-year {
+                font-size: 13.5px;
+            }
+
+            .gpa {
+                min-width: 60px;
+            }
+
+            .gpa span {
+                font-size: 22px;
+            }
+
+            .floating-light {
+                display: none;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .education-card {
+                flex-direction: column;
+                text-align: center;
+                padding: 25px 20px;
+            }
+
+            .logo-wrapper {
+                margin-right: 0;
+                margin-bottom: 20px;
+                width: 90px;
+                height: 90px;
+            }
+
+            .details {
+                text-align: center;
+                padding-right: 0;
+                margin-bottom: 15px;
+            }
+
+            .study-period-container {
+                text-align: center;
+            }
+
+            .study-period,
+            .graduation-year {
+                justify-content: center;
+            }
+
+            .gpa {
+                width: 100%;
+                text-align: center;
+            }
+
+            .gpa p {
+                display: inline-block;
+                margin-right: 10px;
+            }
+
+            .gpa span {
+                display: inline-block;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 12px;
+            }
+
+            .main-title-box {
+                padding: 20px 15px;
+            }
+
+            .education-card {
+                padding: 20px 15px;
+            }
+
+            .logo-wrapper {
+                width: 80px;
+                height: 80px;
+            }
+
+            .details h2 {
+                font-size: 17px;
+            }
+
+            .details p {
+                font-size: 14px;
+            }
+
+            .study-period {
+                font-size: 10px;
+            }
+
+            .graduation-year {
+                font-size: 13px;
+            }
+        }
+
+        /* Animation สำหรับการแสดงผลการ์ด */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .education-card {
+            animation: fadeInUp 0.5s ease forwards;
+            opacity: 0;
+        }
+
+        .education-card:nth-child(2) { animation-delay: 0.1s; }
+        .education-card:nth-child(3) { animation-delay: 0.2s; }
+        .education-card:nth-child(4) { animation-delay: 0.3s; }
+        .education-card:nth-child(5) { animation-delay: 0.4s; }
+        .education-card:nth-child(6) { animation-delay: 0.5s; }
+    </style>
+</head>
+
+<body>
+    <div class="education-container">
+        <!-- หัวข้อหลักแบบสีน้ำเงินโปร่งใส -->
+        <div class="main-title-box">
+            <div class="floating-light light-1"></div>
+            <div class="floating-light light-2"></div>
+            <div class="main-title">EDUCATION - ประวัติการศึกษา</div>
+            <div class="title-underline"></div>
+        </div>
+
+        <div class="education-card">
+            <div class="logo-wrapper">
+                <div class="logo-circle">
+                    <img src="img/edu/byh.png" alt="Primary School Logo" loading="lazy">
+                </div>
+            </div>
+            <div class="details">
+                <h2>ระดับประถมศึกษา</h2>
+                <p>โรงเรียนบ้านยางห้าหลุม</p>
+                <div class="study-period-container">
+                    <div class="study-period">23 พฤษภาคม พ.ศ.2550 - 27 มีนาคม พ.ศ.2558</div>
+                    <div class="graduation-year">สำเร็จการศึกษาปี 2558</div>
+                </div>
+            </div>
+            <div class="gpa">
+                <p>เกรดเฉลี่ย</p>
+                <span>3.93</span>
+            </div>
+        </div>
+
+        <div class="education-card">
+            <div class="logo-wrapper">
+                <div class="logo-circle">
+                    <img src="img/edu/npr.png" alt="Secondary School Logo" loading="lazy">
+                </div>
+            </div>
+            <div class="details">
+                <h2>มัธยมศึกษาปีที่ 1-3</h2>
+                <p>โรงเรียนเนินปอรังนกชนูทิศ</p>
+                <div class="study-period-container">
+                    <div class="study-period">15 พฤษภาคม พ.ศ.2558 - 27 มีนาคม พ.ศ.2561</div>
+                    <div class="graduation-year">สำเร็จการศึกษาปี 2561</div>
+                </div>
+            </div>
+            <div class="gpa">
+                <p>เกรดเฉลี่ย</p>
+                <span>3.66</span>
+            </div>
+        </div>
+
+        <div class="education-card">
+            <div class="logo-wrapper">
+                <div class="logo-circle">
+                    <img src="img/edu/ptc.png" alt="Vocational School Logo" loading="lazy">
+                </div>
+            </div>
+            <div class="details">
+                <h2>ประกาศนียบัตรวิชาชีพ (ปวช.)</h2>
+                <p>วิทยาลัยเทคนิคพิจิตร</p>
+                <p>สาขาวิชาคอมพิวเตอร์ธุรกิจ</p>
+                <div class="study-period-container">
+                    <div class="study-period">15 พฤษภาคม พ.ศ.2561 - 31 มีนาคม พ.ศ.2564</div>
+                    <div class="graduation-year">สำเร็จการศึกษาปี 2564</div>
+                </div>
+            </div>
+            <div class="gpa">
+                <p>เกรดเฉลี่ย</p>
+                <span>3.58</span>
+            </div>
+        </div>
+
+        <div class="education-card">
+            <div class="logo-wrapper">
+                <div class="logo-circle">
+                    <img src="img/edu/spvc.png" alt="Higher Vocational School Logo" loading="lazy">
+                </div>
+            </div>
+            <div class="details">
+                <h2>ประกาศนียบัตรวิชาชีพชั้นสูง (ปวส.)</h2>
+                <p>วิทยาลัยอาชีวศึกษาสุพรรณบุรี</p>
+                <p>สาขาวิชาคอมพิวเตอร์โปรแกรมเมอร์</p>
+                <div class="study-period-container">
+                    <div class="study-period">14 มิถุนายน พ.ศ.2564 - 28 กุมภาพันธ์ พ.ศ.2566</div>
+                    <div class="graduation-year">สำเร็จการศึกษาปี 2566</div>
+                </div>
+            </div>
+            <div class="gpa">
+                <p>เกรดเฉลี่ย</p>
+                <span>3.91</span>
+            </div>
+        </div>
+
+        <div class="education-card">
+            <div class="logo-wrapper">
+                <div class="logo-circle">
+                    <img src="img/edu/psru.png" alt="University Logo" loading="lazy">
+                </div>
+            </div>
+            <div class="details">
+                <h2>ปริญญาตรี</h2>
+                <p>มหาวิทยาลัยราชภัฏพิบูลสงคราม</p>
+                <p>คณะวิทยาศาสตร์และเทคโนโลยี</p>
+                <p>สาขาวิชาเทคโนโลยีสารสนเทศ</p>
+                <div class="study-period-container">
+                    <div class="study-period">3 กรกฎาคม พ.ศ.2566 - 21 พฤษภาคม พ.ศ.2568</div>
+                    <div class="graduation-year">สำเร็จการศึกษาปี 2568</div>
+                </div>
+            </div>
+            <div class="gpa">
+                <p>เกรดเฉลี่ย</p>
+                <span>4.00</span>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

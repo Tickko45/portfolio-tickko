@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>PORTFOLIO - แฟ้มสะสมผลงาน</title>
+    <link rel="icon" href="img/icon/file.png" type="image/x-icon" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="image-modal.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/vs2015.min.css"
+    />
+  </head>
+  <body>
+    <!-- ปุ่มสลับโหมด -->
+    <button class="theme-toggle" onclick="toggleTheme()">
+      <i class="fas fa-moon"></i>
+    </button>
+
+    <!-- เมนูจะถูกแสดงที่นี่ -->
+    <div id="menu-container"></div>
+
+    <!-- Windows -->
+    <div id="home" class="window hidden">
+      <div class="window-header">
+        <span>RESUME - ประวัติย่อ</span>
+        <div class="controls">
+          <button class="close" onclick="closeWindow('home')"></button>
+          <button class="minimize"></button>
+          <button class="maximize"></button>
+        </div>
+      </div>
+      <div class="window-content vs-code-theme">
+        <!-- ดึงเนื้อหาจากไฟล์มา yourself.html -->
+      </div>
+    </div>
+
+    <div id="profile" class="window hidden">
+      <div class="window-header">
+        <span>PROFILE - โปรไฟล์</span>
+        <div class="controls">
+          <button class="close" onclick="closeWindow('profile')"></button>
+          <button class="minimize"></button>
+          <button class="maximize"></button>
+        </div>
+      </div>
+      <div class="window-content vs-code-theme">
+        <!-- ดึงเนื้อหาจากไฟล์มา profile.html -->
+      </div>
+    </div>
+
+    <div id="education" class="window hidden">
+      <div class="window-header">
+        <span>EDUCATION - ประวัติการศึกษา</span>
+        <div class="controls">
+          <button class="close" onclick="closeWindow('education')"></button>
+          <button class="minimize"></button>
+          <button class="maximize"></button>
+        </div>
+      </div>
+      <div class="window-content vs-code-theme">
+        <!-- ดึงเนื้อหาจากไฟล์มา edu.html -->
+      </div>
+    </div>
+
+    <div id="portfolio" class="window hidden">
+      <div class="window-header">
+        <span>PERFORMANCE - ผลงาน</span>
+        <div class="controls">
+          <button class="close" onclick="closeWindow('portfolio')"></button>
+          <button class="minimize"></button>
+          <button class="maximize"></button>
+        </div>
+      </div>
+      <div class="window-content vs-code-theme">
+        <!-- ดึงเนื้อหาจากไฟล์มา work.html -->
+      </div>
+    </div>
+
+    <div id="experience" class="window hidden">
+      <div class="window-header">
+        <span>INTERN - ประสบการณ์การทำงาน</span>
+        <div class="controls">
+          <button class="close" onclick="closeWindow('experience')"></button>
+          <button class="minimize"></button>
+          <button class="maximize"></button>
+        </div>
+      </div>
+      <div class="window-content vs-code-theme">
+        <!-- ดึงเนื้อหาจากไฟล์มา work.html -->
+      </div>
+    </div>
+
+    <!-- Modal พร้อมปุ่มเลื่อน -->
+    <div id="image-modal" class="modal">
+      <span id="close-modal" class="close">&times;</span>
+      <div class="modal-content">
+        <img id="modal-img" class="modal-image" />
+        <a id="prev-image" class="nav-btn">&#10094;</a>
+        <a id="next-image" class="nav-btn">&#10095;</a>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
